@@ -41,18 +41,30 @@ defmodule LogMon do
     }
   end
 
-  def template_by_frequency() do
+  def test do
     %{
-      path_to_monitor: "/full/path/filename.log",
-      backup_time_24_hr: ~T[04:00:00.001],
+      path_to_monitor: "/Users/nerd/logs/lucia.log",
+      desired_file_size: 1024,
       compression: true,
       max_storage_count: 4,
-      storage_path: "/full/path",
-      storage_file_name: "unique_name",
+      storage_path: "/Users/nerd/logs/backups/lucia",
+      storage_file_name: "test_name",
       include_ts: true
     }
   end
 
+  # def template_by_frequency() do
+  #   %{
+  #     path_to_monitor: "/full/path/filename.log",
+  #     backup_time_24_hr: ~T[04:00:00.001],
+  #     compression: true,
+  #     max_storage_count: 4,
+  #     storage_path: "/full/path",
+  #     storage_file_name: "unique_name",
+  #     include_ts: true
+  #   }
+  # end
+  #
   defp valid_config_path?(path) do
     case File.read(path) do
       {:ok, file} ->

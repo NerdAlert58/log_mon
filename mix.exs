@@ -26,4 +26,20 @@ defmodule LogMon.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
+
+  defp description() do
+    "LogMon is a poc doubling as a log monitor, mainly so I can create a package."
+  end
+
+  defp package() do
+    [
+      # This option is only needed when you don't want to use the OTP application name
+      name: "postgrex",
+      # These are the default files included in the package
+      files: ~w(lib priv .formatter.exs mix.exs README* readme* LICENSE*
+                license* CHANGELOG* changelog* src),
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/elixir-ecto/postgrex"}
+    ]
+  end
 end
