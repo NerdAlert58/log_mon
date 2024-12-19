@@ -1,21 +1,21 @@
 defmodule LogMon do
-  @moduledoc "LogMon is a hat tip to logrotate."
+  @moduledoc """
+      LogMon is a hat tip to logrotate.
+  """
 
   require Logger
 
+  @doc """
+  Takes either a full path to a config file or the map of the same.
+
+  """
   def run(path) when is_binary(path) do
     case valid_config_path?(path) do
       {:error, reason} ->
         Logger.error("Failed to read config file due to: #{reason}")
 
       config ->
-        result =
-          config
-          |> valid_config?()
-          |> check_current_log_size()
-          |> check_backup_count(true)
-
-        {:ok, result}
+        run(config)
     end
   end
 
@@ -29,26 +29,40 @@ defmodule LogMon do
     {:ok, result}
   end
 
-  def template_by_size() do
-    %{
-      path_to_monitor: "/full/path/filename.log",
-      desired_file_size: 1024,
-      compression: true,
-      max_storage_count: 4,
-      storage_path: "/full/path",
-      storage_file_name: "unique_name",
-      include_ts: true
-    }
-  end
+  # defp template_by_size() do
+  #   %{
+  #     path_to_monitor: "/full/path/filename.log",
+  #     desired_file_size: 1024,
+  #     compression: true,
+  #     max_storage_count: 4,
+  #     storage_path: "/full/path",
+  #     storage_file_name: "unique_name",
+  #     include_ts: true
+  #   }
+  # end
 
-  def test do
+  @doc """
+  Takes either a full path to a config file or the map of the same.
+
+      iex(1)> LogMon.test
+      %{
+        path_to_monitor: "/Users/user/logs/app.log",
+        desired_file_size: 1024,
+        compression: true,
+        max_storage_count: 4,
+        storage_path: "/Users/user/logs/backups/app",
+        storage_file_name: "app_name",
+        include_ts: true
+      }
+  """
+  def template do
     %{
-      path_to_monitor: "/Users/nerd/logs/lucia.log",
+      path_to_monitor: "/Users/user/logs/app.log",
       desired_file_size: 1024,
       compression: true,
       max_storage_count: 4,
-      storage_path: "/Users/nerd/logs/backups/lucia",
-      storage_file_name: "test_name",
+      storage_path: "/Users/user/logs/backups/app",
+      storage_file_name: "app_name",
       include_ts: true
     }
   end
@@ -140,7 +154,7 @@ defmodule LogMon do
     config
   end
 
-  def valid_path_to_monitor(%{path_to_monitor: path_to_monitor} = config) do
+  defp valid_path_to_monitor(%{path_to_monitor: path_to_monitor} = config) do
     case File.exists?(path_to_monitor) do
       true ->
         File.stat!(path_to_monitor)
@@ -158,7 +172,7 @@ defmodule LogMon do
     end
   end
 
-  def valid_file_size?(%{desired_file_size: desired_file_size} = config) do
+  defp valid_file_size?(%{desired_file_size: desired_file_size} = config) do
     case desired_file_size do
       x when is_number(x) ->
         # if x > 1024 * 1024 do
@@ -170,14 +184,14 @@ defmodule LogMon do
     end
   end
 
-  def valid_compression?(%{compression: compression} = config) do
+  defp valid_compression?(%{compression: compression} = config) do
     case is_boolean(compression) do
       true -> log_step_result(config, :compression, :pass)
       false -> log_step_result(config, :compression, :err)
     end
   end
 
-  def valid_max_storage_count?(%{desired_file_size: desired_file_size} = config) do
+  defp valid_max_storage_count?(%{desired_file_size: desired_file_size} = config) do
     case desired_file_size do
       x when is_number(x) ->
         if x > 0 do
@@ -188,7 +202,7 @@ defmodule LogMon do
     end
   end
 
-  def valid_storage_path?(%{storage_path: storage_path} = config) do
+  defp valid_storage_path?(%{storage_path: storage_path} = config) do
     case File.stat(storage_path) do
       {:ok, _} ->
         log_step_result(config, :storage_path, :pass)
@@ -208,7 +222,7 @@ defmodule LogMon do
     end
   end
 
-  def valid_storage_file_name?(%{storage_file_name: storage_file_name} = config) do
+  defp valid_storage_file_name?(%{storage_file_name: storage_file_name} = config) do
     case storage_file_name do
       nil ->
         log_step_result(config, :storage_file_name, :err)
@@ -225,7 +239,7 @@ defmodule LogMon do
     end
   end
 
-  def valid_include_ts?(%{include_ts: include_ts} = config) do
+  defp valid_include_ts?(%{include_ts: include_ts} = config) do
     case is_boolean(include_ts) do
       true -> log_step_result(config, :include_ts, :pass)
       false -> log_step_result(config, :include_ts, :err)
@@ -317,7 +331,16 @@ defmodule LogMon do
     config
   end
 
-  def compress_file(file_path, compressed_file_name) do
+  # @doc """
+  #   **file_path** expects the full path to the file
+  #
+  #   **compressed_file_name** will append a ".log" to the end of the value here. "myBackup" would be saved as "myBackup.log"
+  #
+  # ```elixir
+  #   LogMon.compress_file()
+  # ```
+  # """
+  defp compress_file(file_path, compressed_file_name) do
     case File.read(file_path) do
       {:ok, content} ->
         compressed_content = :zlib.gzip(content)
