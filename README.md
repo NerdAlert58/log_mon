@@ -34,10 +34,12 @@ LogMon.run(config)
 })
 ```
 > [!NOTE]
-> %LogMon.Config{}
+> I have spent way too much time, just trying to make the docs look ok and work.
 
-> path_to_monitor
-  > This is the path to the log file and should include the filename and extension.
+%LogMon.Config{}
+
+* path_to_monitor
+  * This is the path to the log file and should include the filename and extension.
 * desired_file_size
   * How large would you like your log to grow? (In Bs) 1024*1024*1024 == 1 Gb
 * compression
