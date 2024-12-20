@@ -1,12 +1,81 @@
 defmodule LogMon do
   @moduledoc """
       LogMon is a hat tip to logrotate.
+
+
+      ```elixir
+      LogMon.run("/path/to/config")
+      LogMon.run(config)
+      ```
+
+      LogMon.run(path) -> path: "/path/to/config"
+      LogMon.run(config) -> config: %{
+                                        path_to_monitor: "/home/user/logs/app.log",
+                                        desired_file_size: 1024,
+                                        compression: true,
+                                        max_storage_count: 4,
+                                        storage_path: "/home/user/logs/backups/app",
+                                        storage_file_name: "app_name",
+                                        include_ts: true
+                                    })
+
+  > [!NOTE]
+  > %LogMon.Config{}
+
+      > path_to_monitor
+        > This is the path to the log file and should include the filename and extension.
+      * desired_file_size
+        * How large would you like your log to grow? (In Bs) 1024*1024*1024 == 1 Gb
+      * compression
+        * Do you want the backups compressed? 
+      * max_storage_count
+        * How many backups do you want to maintain?
+      * storage_path
+        * path to where the backups will be kept
+      * storage_file_name
+        * give this a unique value as this is how backups are identified and counted.
+      * include_ts
+        * Do you want a timestamp in the log file name?  Of course.
+
+      The following will check a "path_to_monitor"
+      to see if that file exists and if it happens to be larger than "desired_file_size"
+      If it is, it will make a copy of the "path_to_monitor"
+      at "storage_path"
+      using "storage_file_name"
+      + .log
+      OR
+      + <timestamp>.log 
+      If "include_ts"
+      is set to true.
+      Then, it will check the "storage_path"
+      to see how many files are named according to our matching and if that is larger than "max_storage_count"
+      then it will remove delete the oldest files down to the value supplied.
+
   """
 
   require Logger
 
+  # @doc """
+  # Takes either a full path to a config file or the map of the same.
+  #
+  #     iex(1)> LogMon.run(
+  #     %{
+  #       path_to_monitor: "/home/user/logs/app.log",
+  #       desired_file_size: 1024,
+  #       compression: true,
+  #       max_storage_count: 4,
+  #       storage_path: "/home/user/logs/backups/app",
+  #       storage_file_name: "app_name",
+  #       include_ts: true
+  #     })
+  # """
   @doc """
   Takes either a full path to a config file or the map of the same.
+
+  ## Example
+
+
+
 
   """
   def run(path) when is_binary(path) do
@@ -29,42 +98,44 @@ defmodule LogMon do
     {:ok, result}
   end
 
-  # defp template_by_size() do
-  #   %{
-  #     path_to_monitor: "/full/path/filename.log",
-  #     desired_file_size: 1024,
-  #     compression: true,
-  #     max_storage_count: 4,
-  #     storage_path: "/full/path",
-  #     storage_file_name: "unique_name",
-  #     include_ts: true
-  #   }
-  # end
+  def template_by_size() do
+    %{
+      path_to_monitor: "/full/path/filename.log",
+      desired_file_size: 1024,
+      compression: true,
+      max_storage_count: 4,
+      storage_path: "/full/path",
+      storage_file_name: "unique_name",
+      include_ts: true
+    }
+  end
 
   @doc """
   Takes either a full path to a config file or the map of the same.
 
-      iex(1)> LogMon.test
+      iex(1)> logmon.test
       %{
-        path_to_monitor: "/Users/user/logs/app.log",
+        path_to_monitor: "/home/user/logs/app.log",
         desired_file_size: 1024,
         compression: true,
         max_storage_count: 4,
-        storage_path: "/Users/user/logs/backups/app",
+        storage_path: "/home/user/logs/backups/app",
         storage_file_name: "app_name",
         include_ts: true
       }
   """
   def template do
-    %{
-      path_to_monitor: "/Users/user/logs/app.log",
-      desired_file_size: 1024,
-      compression: true,
-      max_storage_count: 4,
-      storage_path: "/Users/user/logs/backups/app",
-      storage_file_name: "app_name",
-      include_ts: true
-    }
+    # %{
+    #   path_to_monitor: "/Users/user/logs/app.log",
+    #   desired_file_size: 1024,
+    #   compression: true,
+    #   max_storage_count: 4,
+    #   storage_path: "/Users/user/logs/backups/app",
+    #   storage_file_name: "app_name",
+    #   include_ts: true
+    # }
+    IO.inspect("Use this template if log file starts at empty and grows until forever.")
+    template_by_size()
   end
 
   # def template_by_frequency() do

@@ -8,10 +8,18 @@ defmodule LogMon.MixProject do
       elixir: "~> 1.0",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+
+      # Docs
+
+      name: "Log Mon",
+      source_url: "https://github.com/NerdAlert58/log_mon",
+      docs: [
+        main: "LogMon",
+        logo: "logo.png",
+        extras: ["README.md"]
+      ],
       description: description(),
       package: package(),
-      name: "LogMon",
-      source_url: "https://github.com/NerdAlert58/log_mon",
       license: []
     ]
   end
@@ -27,7 +35,8 @@ defmodule LogMon.MixProject do
   defp deps do
     [
       {:jason, "~> 1.4"},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:makeup_html, ">= 0.0.0", only: :dev, runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
