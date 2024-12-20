@@ -17,21 +17,21 @@ end
 
 ## Usage
 
-      ```elixir
-      LogMon.run("/path/to/config")
-      LogMon.run(config)
-      ```
+```elixir
+LogMon.run("/path/to/config")
+LogMon.run(config)
+```
 
-      LogMon.run(path) -> path: "/path/to/config"
-      LogMon.run(config) -> config: %{
-                                        path_to_monitor: "/home/user/logs/app.log",
-                                        desired_file_size: 1024,
-                                        compression: true,
-                                        max_storage_count: 4,
-                                        storage_path: "/home/user/logs/backups/app",
-                                        storage_file_name: "app_name",
-                                        include_ts: true
-                                    })
+LogMon.run(path) -> path: "/path/to/config"
+LogMon.run(config) -> config: %{
+                                  path_to_monitor: "/home/user/logs/app.log",
+                                  desired_file_size: 1024,
+                                  compression: true,
+                                  max_storage_count: 4,
+                                  storage_path: "/home/user/logs/backups/app",
+                                  storage_file_name: "app_name",
+                                  include_ts: true
+                              })
 
   > [!NOTE]
   > %LogMon.Config{}
