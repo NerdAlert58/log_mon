@@ -45,7 +45,6 @@ An extra paragraph after the list.
 ### With headings and code links
 {: .col-2}
 
-
 #### path_to_monitor
 
 - This is the path to the log file and should include the filename and extension.
