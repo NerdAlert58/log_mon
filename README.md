@@ -21,48 +21,49 @@ end
 LogMon.run("/path/to/config")
 LogMon.run(config)
 ```
+## %LogMon.Config{}
+
+
 
 ```elixir
-
-LogMon.run(path) -> path: "/path/to/config"
-LogMon.run(config) -> config: %{
-                                  path_to_monitor: "/home/user/logs/app.log",
-                                  desired_file_size: 1024,
-                                  compression: true,
-                                  max_storage_count: 4,
-                                  storage_path: "/home/user/logs/backups/app",
-                                  storage_file_name: "app_name",
-                                  include_ts: true
-                              })
+%{
+  path_to_monitor: "/home/user/logs/app.log",
+  desired_file_size: 1024,
+  compression: true,
+  max_storage_count: 4,
+  storage_path: "/home/user/logs/backups/app",
+  storage_file_name: "app_name",
+  include_ts: true
+})
 ```
 ```
-  > [!NOTE]
-  > %LogMon.Config{}
+> [!NOTE]
+> %LogMon.Config{}
 
-      > path_to_monitor
-        > This is the path to the log file and should include the filename and extension.
-      * desired_file_size
-        * How large would you like your log to grow? (In Bs) 1024*1024*1024 == 1 Gb
-      * compression
-        * Do you want the backups compressed? 
-      * max_storage_count
-        * How many backups do you want to maintain?
-      * storage_path
-        * path to where the backups will be kept
-      * storage_file_name
-        * give this a unique value as this is how backups are identified and counted.
-      * include_ts
-        * Do you want a timestamp in the log file name?  Of course.
+    > path_to_monitor
+      > This is the path to the log file and should include the filename and extension.
+    * desired_file_size
+      * How large would you like your log to grow? (In Bs) 1024*1024*1024 == 1 Gb
+    * compression
+      * Do you want the backups compressed? 
+    * max_storage_count
+      * How many backups do you want to maintain?
+    * storage_path
+      * path to where the backups will be kept
+    * storage_file_name
+      * give this a unique value as this is how backups are identified and counted.
+    * include_ts
+      * Do you want a timestamp in the log file name?  Of course.
 ```elixir
-    %{
-      path_to_monitor: "/home/user/logs/app.log",
-      desired_file_size: 1024,
-      compression: true,
-      max_storage_count: 4,
-      storage_path: "/home/user/logs/backups/app",
-      storage_file_name: "test_name",
-      include_ts: true
-    }
+  %{
+    path_to_monitor: "/home/user/logs/app.log",
+    desired_file_size: 1024,
+    compression: true,
+    max_storage_count: 4,
+    storage_path: "/home/user/logs/backups/app",
+    storage_file_name: "test_name",
+    include_ts: true
+  }
 
 ```
 ### 1. Keep log from using all storage.
