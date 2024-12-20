@@ -22,6 +22,8 @@ LogMon.run("/path/to/config")
 LogMon.run(config)
 ```
 
+```elixir
+
 LogMon.run(path) -> path: "/path/to/config"
 LogMon.run(config) -> config: %{
                                   path_to_monitor: "/home/user/logs/app.log",
@@ -32,7 +34,8 @@ LogMon.run(config) -> config: %{
                                   storage_file_name: "app_name",
                                   include_ts: true
                               })
-
+```
+```
   > [!NOTE]
   > %LogMon.Config{}
 
