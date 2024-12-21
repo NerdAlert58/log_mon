@@ -34,11 +34,17 @@ LogMon.run(config)
 ```
 > [!NOTE]
 > **path_to_monitor**
+>
 > path to the log file and should include the filename and extension.
+>
 > **desired_file_size**
+>
 > How large would you like your log to grow? (In Bs) 1024 * 1024 * 1024 == 1 Gb
+>
 > **compression**
+>
 > Do you want the backups compressed? 
+>
 > **max_storage_count**
 > How many backups do you want to maintain?
 > **storage_path**
