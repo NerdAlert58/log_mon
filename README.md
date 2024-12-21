@@ -1,6 +1,6 @@
 # LogMon
 
-**TODO: Add description**
+**log_rotate was one of the first programs I "found".  I used it for years. Now I've decided to write one myself.**
 
 ## Installation
 
@@ -18,15 +18,60 @@ end
 ## Usage
 
 ```elixir
-    %{
-      path_to_monitor: "/Users/user/logs/app.log",
-      desired_file_size: 1024,
-      compression: true,
-      max_storage_count: 4,
-      storage_path: "/Users/user/logs/backups/app",
-      storage_file_name: "test_name",
-      include_ts: true
-    }
+LogMon.run("/path/to/config")
+LogMon.run(config)
+```
+```elixir
+%{
+  path_to_monitor: "/home/user/logs/app.log",
+  desired_file_size: 1024,
+  compression: true,
+  max_storage_count: 4,
+  storage_path: "/home/user/logs/backups/app",
+  storage_file_name: "app_name",
+  include_ts: true
+})
+```
+> [!NOTE]
+> **path_to_monitor**
+>
+> path to the log file and should include the filename and extension.
+>
+> **desired_file_size**
+>
+> How large would you like your log to grow? (In Bs) 1024 * 1024 * 1024 == 1 Gb
+>
+> **compression**
+>
+> Do you want the backups compressed? 
+>
+> **max_storage_count**
+>
+> How many backups do you want to maintain?
+>
+> **storage_path**
+>
+> path to where the backups will be kept
+>
+> **storage_file_name**
+>
+> Give this a unique value as this is how backups are identified and counted.
+>
+> **include_ts**
+>
+> Do you want a timestamp in the log file name?  Of course.
+>
+
+```elixir
+  %{
+    path_to_monitor: "/home/user/logs/app.log",
+    desired_file_size: 1024,
+    compression: true,
+    max_storage_count: 4,
+    storage_path: "/home/user/logs/backups/app",
+    storage_file_name: "test_name",
+    include_ts: true
+  }
 
 ```
 ### 1. Keep log from using all storage.
