@@ -46,13 +46,21 @@ LogMon.run(config)
 > Do you want the backups compressed? 
 >
 > **max_storage_count**
+>
 > How many backups do you want to maintain?
+>
 > **storage_path**
+>
 > path to where the backups will be kept
+>
 > **storage_file_name**
+>
 > Give this a unique value as this is how backups are identified and counted.
+>
 > **include_ts**
+>
 > Do you want a timestamp in the log file name?  Of course.
+>
 
 ```elixir
   %{
