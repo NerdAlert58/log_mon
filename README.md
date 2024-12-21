@@ -21,7 +21,6 @@ end
 LogMon.run("/path/to/config")
 LogMon.run(config)
 ```
-%LogMon.Config{}
 ```elixir
 %{
   path_to_monitor: "/home/user/logs/app.log",
@@ -34,30 +33,20 @@ LogMon.run(config)
 })
 ```
 > [!NOTE]
-> I have spent way too much time, just trying to make the docs look ok and work.
-
-1. First
-2. Second
-3. Third
-
-An extra paragraph after the list.
-
-### With headings and code links
-
-**path_to_monitor**
-- path to the log file and should include the filename and extension.
-**desired_file_size**
-- How large would you like your log to grow? (In Bs) 1024 * 1024 * 1024 == 1 Gb
-**compression**
-- Do you want the backups compressed? 
-**max_storage_count**
-- How many backups do you want to maintain?
-**storage_path**
-- path to where the backups will be kept
-**storage_file_name**
-- Give this a unique value as this is how backups are identified and counted.
-**include_ts**
-- Do you want a timestamp in the log file name?  Of course.
+> **path_to_monitor**
+> path to the log file and should include the filename and extension.
+> **desired_file_size**
+> How large would you like your log to grow? (In Bs) 1024 * 1024 * 1024 == 1 Gb
+> **compression**
+> Do you want the backups compressed? 
+> **max_storage_count**
+> How many backups do you want to maintain?
+> **storage_path**
+> path to where the backups will be kept
+> **storage_file_name**
+> Give this a unique value as this is how backups are identified and counted.
+> **include_ts**
+> Do you want a timestamp in the log file name?  Of course.
 
 ```elixir
   %{
