@@ -44,19 +44,19 @@ An extra paragraph after the list.
 
 ### With headings and code links
 
-#### path_to_monitor
+**path_to_monitor**
 - path to the log file and should include the filename and extension.
-#### desired_file_size
-- How large would you like your log to grow? (In Bs) 1024*1024*1024 == 1 Gb
-#### compression
+**desired_file_size**
+- How large would you like your log to grow? (In Bs) 1024 * 1024 * 1024 == 1 Gb
+**compression**
 - Do you want the backups compressed? 
-#### max_storage_count
+**max_storage_count**
 - How many backups do you want to maintain?
-#### storage_path
+**storage_path**
 - path to where the backups will be kept
-#### storage_file_name
+**storage_file_name**
 - Give this a unique value as this is how backups are identified and counted.
-#### include_ts
+**include_ts**
 - Do you want a timestamp in the log file name?  Of course.
 
 ```elixir
