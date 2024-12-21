@@ -58,6 +58,7 @@ An extra paragraph after the list.
 - Give this a unique value as this is how backups are identified and counted.
 #### include_ts
 - Do you want a timestamp in the log file name?  Of course.
+
 ```elixir
   %{
     path_to_monitor: "/home/user/logs/app.log",
